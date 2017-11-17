@@ -12,14 +12,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author PC-Acta
  */
 public class UserController {
-    public User getUser(String login, String mdp) throws SQLException{
-        
+    public User getUser(String login, String mdp){
+        try {
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/BASESTAG","adm","adm");
             Statement stmt = c.createStatement();
             PreparedStatement pstmt = c.prepareStatement("SELECT login,mdp from tuteur where login = ? and mdp= ?");
@@ -30,8 +32,12 @@ public class UserController {
             if(rs.next()){
                 user.setLogin(rs.getString("login"));
                 user.setMdp(rs.getString("mdp"));
+                return user;
             }
-            return user;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
+         return null;   
     }
 }
