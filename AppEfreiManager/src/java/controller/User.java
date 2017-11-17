@@ -9,9 +9,10 @@ package controller;
  *
  * @author PC-Acta
  */
-public class Login {
+public class User {
     private String login;
     private String mdp;
+    
 
     public String getLogin() {
         return login;
