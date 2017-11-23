@@ -11,34 +11,46 @@
         <title>AppEfreiManager</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="WEB-INF/style.css">
-        
+
     </head>
     <body>
-       
-        <div class="nav-wrapper cyan darken-2">
-          <a href="#" class="brand-logo center">EfreiManager</a>
-        </div>
-      </nav>   
+    <center>
+        <h5 class="indigo-text">EfreiManager</h5>
         <c:out value="${status}" />
-        <div>
-            <form  action='Servlet' method='POST'>
-              <div class="form-row align-items-center">
-                <div class="col-auto">
-                  <input type="text" class="form-control mb-2 mb-sm-0" id="inlineFormInput" placeholder="login" name="login">
-                </div>
-                <div class="col-auto">
-                  <div class="input-group mb-2 mb-sm-0">
-                    <input type="password" class="form-control" id="inlineFormInputGroup" placeholder="password" name="mdp">
-                  </div>
-                </div>
-                <div class="col-auto">
-                    <input type="hidden" name="actionlogin">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </div>
-            </form>
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <form class="col s12" action='Servlet' method='POST'>
+                    <div class='row'>
+                        <div class='col s12'></div>
+                    </div>
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' name="login" id='login'/>
+                            <label for='login'>Enter your login</label>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='password' name="password" id='password'/>
+                            <label for='password'>Enter your password</label>
+                        </div>
+                    </div>
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <input type="hidden" name="actionlogin">
+                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                        </div>
+                    </center>
+                </form>
+            </div>
         </div>
-    </body>
+        <a href="http://www.efrei.fr/">Efrei</a>
+    </center>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+</body>
 </html>

@@ -14,20 +14,20 @@
         <title>Profile</title>
     </head>
     <body>
- 
-     <nav>
-        <div class="nav-wrapper cyan darken-2">
-          <a href="#" class="brand-logo center">EfreiManager</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">${user.getNom()}  ${user.getPrenom()}</a></li>
-            <li>
-            <form class="form-inline my-2 my-lg-0" action='Servlet' method='POST'>
-               <button class="btn waves-effect waves-light" type="submit" name="deconnexion">Deconnexion</button>
-             </form>  
-            </li>  
-          </ul>
-        </div>
-      </nav>           
-       
+
+        <nav>
+            <div class="nav-wrapper cyan darken-2">
+                <a href="#" class="brand-logo center">EfreiManager</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="sass.html">${user.getNom()}  ${user.getPrenom()}</a></li>
+                    <li>
+                        <form class="form-inline my-2 my-lg-0" action='Servlet' method='POST'>
+                            <button class="btn waves-effect waves-light" type="submit" name="deconnexion">Deconnexion</button>
+                        </form>  
+                    </li>  
+                </ul>
+            </div>
+        </nav>           
+
     </body>
 </html>
