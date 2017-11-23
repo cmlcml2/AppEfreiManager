@@ -71,7 +71,7 @@ public class Servlet extends HttpServlet {
         if(request.getParameter("actionlogin")!=null){
             if(!request.getParameter("login").equals("")|| !request.getParameter("password").equals("")){
                 UserController usercontroller = new UserController();
-                User user = usercontroller.getUser(request.getParameter("login") , request.getParameter("password   "));
+                User user = usercontroller.getUser(request.getParameter("login") , request.getParameter("password"));
                 
                 if(user!=null){
                     request.getSession().setAttribute("user", user);
@@ -89,6 +89,10 @@ public class Servlet extends HttpServlet {
         else if(request.getParameter("deconnexion")!=null){
             request.getSession().invalidate();
             request.getServletContext().getRequestDispatcher(PAGE_DECONNEXION).forward(request,response);
+        }else if (request.getParameter("returnhome")!=null){
+            request.getSession().invalidate();
+            request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);
+
         }
         else{
             

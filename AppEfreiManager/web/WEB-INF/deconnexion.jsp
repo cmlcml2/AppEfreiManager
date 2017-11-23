@@ -10,11 +10,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <title>Deconnexion</title>
+        <title>AppEfreiManager Deconnexion</title>
     </head>
     <body>
-        <h1>Aurevoir et à bientôt!!</h1>
+        <center>
+            <h1>Aurevoir et à bientôt!!</h1>
+
+            <form class="form-inline my-2 my-lg-0" action='Servlet' method='POST'>
+                <button class="btn-floating btn-large scale-transitiont" type="submit" name="returnhome">
+                <i class="material-icons right">done</i>
+              </button>
+            </form>    
+        </center>
     </body>
 </html>
