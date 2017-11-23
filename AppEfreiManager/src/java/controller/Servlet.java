@@ -16,8 +16,10 @@ import sources.UserController;
  *
  * @author PC-Acta
  */
-public class Servlet extends HttpServlet {
 
+public class Servlet extends HttpServlet {
+    private static final String PAGE_PROFIL = "/WEB-INF/profil.jsp";
+     private static final String PAGE_INDEX = "/WEB-INF/index.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -27,6 +29,7 @@ public class Servlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -47,7 +50,7 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {       
-        request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request, response);
     }
 
     /**
@@ -61,17 +64,27 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        UserController usercontroller = new UserController();
-        User user = usercontroller.getUser(request.getParameter("login") , request.getParameter("mdp"));
-        if(user!=null){
-            request.getSession().setAttribute("user", user.getLogin());
-            response.sendRedirect("WEB-INF/profil.jsp");
-       }else{
-            request.getSession().setAttribute("status", "NO-VALIDE-USER" );
-            request.getRequestDispatcher("WEB-INF/index.jsp").forward(request,response);
+        if(request.getParameter("actionlogin")!=null){
+            if(!request.getParameter("login").equals("")|| !request.getParameter("mdp").equals("")){
+                UserController usercontroller = new UserController();
+                User user = usercontroller.getUser(request.getParameter("login") , request.getParameter("mdp"));
+                
+                if(user!=null){
+                    request.getSession().setAttribute("user", user);
+                    request.getRequestDispatcher(PAGE_PROFIL).forward(request, response);
+               }else{
+                    request.getSession().setAttribute("status", "Erreur d'authentification / Utilisateur n'existe pas" );
+                    request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);
+                }
+            }else{
+                   request.getSession().setAttribute("status", "Veuillez remplir les champs vides" );
+                 request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);
+            }
+        }else{
+            
+            request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);
         }
- 
+        
     }
 
     /**

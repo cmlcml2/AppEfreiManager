@@ -24,7 +24,7 @@ public class UserController {
         try {
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/BASESTAG","adm","adm");
             Statement stmt = c.createStatement();
-            PreparedStatement pstmt = c.prepareStatement("SELECT login,mdp from tuteur where login = ? and mdp= ?");
+            PreparedStatement pstmt = c.prepareStatement("SELECT * from tuteur where login = ? and mdp= ?");
             pstmt.setString(1, login);
             pstmt.setString(2,mdp);
             ResultSet rs = pstmt.executeQuery();
@@ -32,6 +32,8 @@ public class UserController {
             if(rs.next()){
                 user.setLogin(rs.getString("login"));
                 user.setMdp(rs.getString("mdp"));
+                user.setNom(rs.getString("nom"));
+                user.setNom(rs.getString("prenom"));
                 return user;
             }
         } catch (SQLException ex) {
