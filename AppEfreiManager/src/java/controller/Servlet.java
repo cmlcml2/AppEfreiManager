@@ -8,11 +8,13 @@ package controller;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sources.StagiaireController;
 import sources.UserController;
 
 /**
@@ -75,7 +77,12 @@ public class Servlet extends HttpServlet {
                 
                 if(user!=null){
                     request.getSession().setAttribute("user", user);
-                    request.getRequestDispatcher(PAGE_PROFIL).forward(request, response);
+                    StagiaireController stagiaireController = new StagiaireController();
+                    List<Stagiaire> stagiaires = stagiaireController.getStagiaires(user.getId());
+                    request.setAttribute("stagiaires", stagiaires);
+                    request.setAttribute("size", stagiaires.size());
+
+                    request.getRequestDispatcher(PAGE_PROFIL).forward(request, response);                    
                }else{
                     request.getSession().setAttribute("status", "Erreur d'authentification / Utilisateur n'existe pas" );
                     request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);

@@ -27,7 +27,13 @@
             </li>  
           </ul>
         </div>
-      </nav>           
+      </nav> 
+            
+        
+            <c:forEach items="${stagiaires}" var="stagiaire">
+               <c:out value="${stagiaire.nom}" />
+            </c:forEach>
+            
        
     </body>
 </html>
