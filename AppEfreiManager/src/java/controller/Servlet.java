@@ -69,9 +69,9 @@ public class Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(request.getParameter("actionlogin")!=null){
-            if(!request.getParameter("login").equals("")|| !request.getParameter("mdp").equals("")){
+            if(!request.getParameter("login").equals("")|| !request.getParameter("password").equals("")){
                 UserController usercontroller = new UserController();
-                User user = usercontroller.getUser(request.getParameter("login") , request.getParameter("mdp"));
+                User user = usercontroller.getUser(request.getParameter("login") , request.getParameter("password   "));
                 
                 if(user!=null){
                     request.getSession().setAttribute("user", user);
