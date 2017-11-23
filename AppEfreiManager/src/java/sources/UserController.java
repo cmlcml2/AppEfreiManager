@@ -29,7 +29,7 @@ public class UserController {
         try {
             Properties prop = PropertyLoader.load();
 
-            Connection c = DriverManager.getConnection(prop.getProperty("database"),"adm","adm");
+            Connection c = DriverManager.getConnection(prop.getProperty("databasedriver") + prop.getProperty("database"),prop.getProperty("logindatabase"),prop.getProperty("mdpdatabase"));
             Statement stmt = c.createStatement();
             PreparedStatement pstmt = c.prepareStatement("SELECT * from tuteur where login = ? and mdp= ?");
             pstmt.setString(1, login);
