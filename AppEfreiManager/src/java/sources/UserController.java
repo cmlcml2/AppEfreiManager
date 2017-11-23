@@ -6,6 +6,8 @@
 package sources;
 
 import controller.User;
+import java.io.IOException;
+import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,15 +16,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import proprietes.PropertyLoader;
 
 /**
  *
  * @author PC-Acta
  */
 public class UserController {
-    public User getUser(String login, String mdp){
+    public User getUser(String login, String mdp) throws IOException{
+        
+       
         try {
-            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/BASESTAG","adm","adm");
+            Properties prop = PropertyLoader.load();
+
+            Connection c = DriverManager.getConnection(prop.getProperty("database"),"adm","adm");
             Statement stmt = c.createStatement();
             PreparedStatement pstmt = c.prepareStatement("SELECT * from tuteur where login = ? and mdp= ?");
             pstmt.setString(1, login);
@@ -33,7 +40,7 @@ public class UserController {
                 user.setLogin(rs.getString("login"));
                 user.setMdp(rs.getString("mdp"));
                 user.setNom(rs.getString("nom"));
-                user.setNom(rs.getString("prenom"));
+                user.setPrenom(rs.getString("prenom"));
                 return user;
             }
         } catch (SQLException ex) {

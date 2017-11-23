@@ -15,9 +15,21 @@
         <title>Profile</title>
     </head>
     <body>
-      
-        <h1>Efrei Manager</h1>
-        <p> ${user.getNom()}</p>
-        <p> ${user.getPrenom()} </p>
+ 
+        <nav class="navbar   navbar-light">
+            <a class="navbar-brand" href="#">EfreiManager</a>
+            <div class="navbar" id="navbarNav">
+                   
+                <p> ${user.getNom()}</p>
+                
+                <p> ${user.getPrenom()} </p>
+                
+                <form class="form-inline my-2 my-lg-0" action='Servlet' method='POST'>
+                    <input type="hidden" name="actionDeconnexion">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deconnexion">Deconnexion</button>
+                  </form>
+            </div>
+          </nav>
+        
     </body>
 </html>

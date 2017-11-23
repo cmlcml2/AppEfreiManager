@@ -5,7 +5,10 @@
  */
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +22,8 @@ import sources.UserController;
 
 public class Servlet extends HttpServlet {
     private static final String PAGE_PROFIL = "/WEB-INF/profil.jsp";
-     private static final String PAGE_INDEX = "/WEB-INF/index.jsp";
+    private static final String PAGE_INDEX = "/WEB-INF/index.jsp";
+    private static final String PAGE_DECONNEXION = "/WEB-INF/deconnexion.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -80,7 +84,13 @@ public class Servlet extends HttpServlet {
                    request.getSession().setAttribute("status", "Veuillez remplir les champs vides" );
                  request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);
             }
-        }else{
+        }
+        
+        else if(request.getParameter("deconnexion")!=null){
+            request.getSession().invalidate();
+            request.getServletContext().getRequestDispatcher(PAGE_DECONNEXION).forward(request,response);
+        }
+        else{
             
             request.getServletContext().getRequestDispatcher(PAGE_INDEX).forward(request,response);
         }
@@ -96,5 +106,6 @@ public class Servlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    
 }
