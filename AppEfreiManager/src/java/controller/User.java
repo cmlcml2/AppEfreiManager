@@ -10,10 +10,19 @@ package controller;
  * @author PC-Acta
  */
 public class User {
+    private int id;
     private String login;
     private String mdp;
     private String nom;
     private String prenom;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNom() {
         return nom;

@@ -5,15 +5,17 @@
  */
 package sources;
 
+import controller.Stagiaire;
 import controller.User;
 import java.io.IOException;
-import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proprietes.PropertyLoader;
@@ -22,28 +24,28 @@ import proprietes.PropertyLoader;
  *
  * @author PC-Acta
  */
-public class UserController {
-    public User getUser(String login, String mdp) throws IOException{
-        
-       
+public class StagiaireController {
+    public ArrayList<Stagiaire> getStagiaires(int idTuteur) throws IOException{
         try {
             Properties prop = PropertyLoader.load();
 
             Connection c = DriverManager.getConnection(prop.getProperty("databasedriver") + prop.getProperty("database"),prop.getProperty("logindatabase"),prop.getProperty("mdpdatabase"));
             Statement stmt = c.createStatement();
-            PreparedStatement pstmt = c.prepareStatement("SELECT * from tuteur where login = ? and mdp= ?");
-            pstmt.setString(1, login);
-            pstmt.setString(2,mdp);
+            PreparedStatement pstmt = c.prepareStatement("SELECT * FROM entreprise NATURAL JOIN stagiaire where id_tuteur = ?");
+            pstmt.setInt(1, idTuteur);
             ResultSet rs = pstmt.executeQuery();
-            User user = new User();
-            if(rs.next()){
-                user.setLogin(rs.getString("login"));
-                user.setMdp(rs.getString("mdp"));
-                user.setNom(rs.getString("nom"));
-                user.setPrenom(rs.getString("prenom"));
-                user.setId(rs.getInt("id"));
-                return user;
+            ArrayList<Stagiaire> stagiaires = new ArrayList<>();
+            
+            while(rs.next()){
+                Stagiaire stagiaire = new Stagiaire();
+                stagiaire.setId(rs.getInt("id_stagiaire"));
+                stagiaire.setNom(rs.getString("nom"));
+                stagiaire.setPrenom(rs.getString("prenom"));
+                stagiaire.setClasse(rs.getString("classe"));
+                stagiaires.add(stagiaire);
+                
             }
+            return stagiaires;
         } catch (SQLException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
